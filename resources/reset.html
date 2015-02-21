@@ -1,0 +1,128 @@
+
+<html><head>
+<style>
+input { text-align: center; }
+ul { list-style: none; display: inline; }
+.course { border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
+table, .courses { float: left;}
+table {margin-right: 20px;}
+	body { font-family: Tahoma; color: #515151; background-color: white; }
+	td { border-top: none; border-bottom: 1px solid #515151; border-left: none; border-right: none; } 
+	td.ui-state-hover { background-color: red; }
+	td.last { border-bottom: none; }
+	td.first, td.last-col { background-color:#FFF985; border-left:1px solid #515151;	border-right: 1px solid #515151; }
+	td.last { border-bottom: none; }
+	tr { border-left:1px solid #515151; border-right: 1px solid #515151; }
+	table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
+</style>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Horaire</title>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+</head>
+<body>
+<table border="1" cellpadding="5" cellspacing="0" width="80%" height="100%">
+<tbody>
+<tr class="first" align="CENTER">
+<td rowspan="1" colspan="1"></td>
+<td rowspan="1" colspan="1"><input type="text"></td>
+<td rowspan="1" colspan="1"><input type="text"></td>
+<td rowspan="1" colspan="1"><input type="text"></td>
+<td rowspan="1" colspan="1"><input type="text"></td>
+<td rowspan="1" colspan="1"><input type="text"></td>
+<td></td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b><input type="text"></b></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td class="last-col" rowspan="1" colspan="1">09:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">10:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">11:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">12:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b><input type="text"></b></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td rowspan="4" class="inner"></td>
+<td class="last-col" rowspan="1" colspan="1">13:30</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">14:30</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">15:30</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">16:30</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="first last" rowspan="4" colspan="1" height="160"><b><input type="text"></b></td>
+<td rowspan="4" class="last inner"></td>
+<td rowspan="4" class="last inner"></td>
+<td rowspan="4" class="last inner"></td>
+<td rowspan="4" class="last inner"></td>
+<td rowspan="4" class="last inner"></td>
+<td class="last-col" rowspan="1" colspan="1">18:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">19:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last-col" rowspan="1" colspan="1">20:00</td>
+</tr>
+<tr align="CENTER" valign="CENTER">
+<td class="last last-col" rowspan="1" colspan="1">21:00</td>
+</tr>
+</tbody></table>
+<div class="courses">
+<h2>Courses</h2>
+<button>Add</button>
+<ul>
+<li>
+	<div class="course ui-widget-content">
+		<input type="text"> <br/>
+		<input type="color" id="myColor">
+	</div>
+</li>
+<li>
+	<div class="course ui-widget-content">
+		<input type="text"> <br/>
+		<input type="color" id="myColor">
+	</div>
+</li>
+<li>
+	<div class="course ui-widget-content">
+		<input type="text"> <br/>
+		<input type="color" id="myColor">
+	</div>
+</li>
+</ul>
+</div>
+</body>
+<script>
+  $(function() {
+    $('.course').draggable({ revert: true });
+    $('td.inner').droppable({
+      accept: '.course',
+      activeClass: 'ui-state-active',
+      hoverClass: 'ui-state-hover',
+      drop: function(event, ui) {
+        $(this).html('<b>'+'course'+'</b><br><input type-"text"><br><input type="text"<br>')
+      }
+    });
+  });
+  </script>
+
+</html>

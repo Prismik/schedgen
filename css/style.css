@@ -1,0 +1,6 @@
+body { font-family: Tahoma; color: #515151; background-color: white; }
+td { border-top: none; border-bottom: 1px solid #515151; border-left: none; border-right: none; } 
+td.first, td.last-col { background-color:#FFF985; border-left:1px solid #515151;	border-right: 1px solid #515151; }
+td.last { border-bottom: none; }
+tr { border-left:1px solid #515151; border-right: 1px solid #515151; }
+table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
