@@ -1,14 +1,27 @@
 
 <html><head>
 <style>
+/* Colors Scheme 
+00CFDE	 Teal Blue
+1CC1F6	 Light Blue
+b0a3ff	 Steel Purple-Blue
+FF5F69	 Tomato red
+D1F486	 Lime green
+FFF985	 Yellow cream
+28CA81	 Teal Green
+34DD91	 Light teal green
+*/
+
 input { text-align: center; }
 ul { list-style: none; display: inline; }
+.schedCourse { cursor: move; height: 100%; background-color: #D1F486; }
 .course { border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
 table, .courses { float: left;}
 table {margin-right: 20px;}
 	body { font-family: Tahoma; color: #515151; background-color: white; }
-	td { border-top: none; border-bottom: 1px solid #515151; border-left: none; border-right: none; } 
-	td.ui-state-hover { background-color: red; }
+	td { border-top: none; border-bottom: 1px solid #515151; border-left: none; border-right: none; padding: 0; } 
+	td.ui-state-hover { background-color: #FF5F69; }
+	.schedCourse.ui-draggable-dragging { opacity: 0.3; }
 	td.last { border-bottom: none; }
 	td.first, td.last-col { background-color:#FFF985; border-left:1px solid #515151;	border-right: 1px solid #515151; }
 	td.last { border-bottom: none; }
@@ -33,96 +46,150 @@ table {margin-right: 20px;}
 </tr>
 <tr align="CENTER" valign="CENTER">
 <td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b><input type="text"></b></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">09:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">10:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">11:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">12:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
 <td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b><input type="text"></b></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
-<td rowspan="4" class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">13:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">14:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">15:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">16:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
 <td class="first last" rowspan="4" colspan="1" height="160"><b><input type="text"></b></td>
-<td rowspan="4" class="last inner"></td>
-<td rowspan="4" class="last inner"></td>
-<td rowspan="4" class="last inner"></td>
-<td rowspan="4" class="last inner"></td>
-<td rowspan="4" class="last inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+
 <td class="last-col" rowspan="1" colspan="1">18:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">19:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
+<td class="inner"></td>
 <td class="last-col" rowspan="1" colspan="1">20:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
+<td class="last inner"></td>
+<td class="last inner"></td>
+<td class="last inner"></td>
+<td class="last inner"></td>
+<td class="last inner"></td>
 <td class="last last-col" rowspan="1" colspan="1">21:00</td>
 </tr>
 </tbody></table>
 <div class="courses">
 <h2>Courses</h2>
-<button>Add</button>
+<button id="addCourse">Add</button>
 <ul>
-<li>
-	<div class="course ui-widget-content">
-		<input type="text"> <br/>
-		<input type="color" id="myColor">
-	</div>
-</li>
-<li>
-	<div class="course ui-widget-content">
-		<input type="text"> <br/>
-		<input type="color" id="myColor">
-	</div>
-</li>
-<li>
-	<div class="course ui-widget-content">
-		<input type="text"> <br/>
-		<input type="color" id="myColor">
-	</div>
-</li>
+
 </ul>
 </div>
 </body>
 <script>
-  $(function() {
-    $('.course').draggable({ revert: true });
-    $('td.inner').droppable({
-      accept: '.course',
-      activeClass: 'ui-state-active',
-      hoverClass: 'ui-state-hover',
-      drop: function(event, ui) {
-        $(this).html('<b>'+'course'+'</b><br><input type-"text"><br><input type="text"<br>')
-      }
-    });
-  });
-  </script>
+	var i = 0;
+	var addCourse = function() {
+		var no = i++;
+		var course = $('<li><div class="js-course course' +
+		 	' ui-widget-content" data-course="'+ no +'">' +
+			'<input type="text"><br/><input type="color" id="myColor"></div></li>');
+		course.find('.js-course').draggable({ cursorAt: {top: 33, left: 75 } , revert: true });
+		var input = course.find('input[type=text]');
+		input.keyup(function() {
+			$('.schedCourse[data-course="' + no + '"]').find('.js-name').html($(this).val());
+		});
+		$('.courses ul').append(course);
+	}
+	$(function() {
+		$('#addCourse').click(addCourse);
+		$('td.inner').droppable({
+			accept: '.js-course',
+			activeClass: 'ui-state-active',
+			hoverClass: 'ui-state-hover',
+			drop: function(event, ui) {
+				var name = '';
+				var id = ui.draggable.data('course');
+				if (ui.draggable.hasClass('schedCourse')) {
+					name = ui.draggable.find('.js-name').html();
+					ui.draggable.remove();
+				}
+				else
+					name = ui.draggable.find('input[type=text]').val()
+
+				var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text"><br><input type="text"<br></div>');
+				
+				course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true });
+				$(this).html(course)
+			}
+		});
+	});
+	</script>
 
 </html>
