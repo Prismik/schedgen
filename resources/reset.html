@@ -11,42 +11,76 @@ FFF985	 Yellow cream
 28CA81	 Teal Green
 34DD91	 Light teal green
 */
-
+body { font-family: Tahoma; color: #515151; background-color: white; }
+input[type="color"] { width: 131px; margin-top: 5px; }
 input { text-align: center; }
-ul { list-style: none; display: inline; }
+input.upper { text-transform: uppercase; }
+
+.trash { 
+	float: right; 
+	background-color: red; 
+	width: 80px; height: 70px;  
+	background-image: url(../resources/trash-close.png); 
+	background-size: 80px 60px; 
+	background-repeat: no-repeat; 
+	padding: 0.5em;
+}
+.trash.ui-state-hover { 
+	background-image: url(../resources/trash-open.png); 
+	background-size: 80px 60px; 
+	background-repeat: no-repeat;
+}
+
+.courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
 .schedCourse { cursor: move; height: 100%; background-color: #D1F486; }
 .course { border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
-table, .courses { float: left;}
-table {margin-right: 20px;}
-	body { font-family: Tahoma; color: #515151; background-color: white; }
-	td { border-top: none; border-bottom: 1px solid #515151; border-left: none; border-right: none; padding: 0; } 
-	td.ui-state-hover { background-color: #FF5F69; }
-	.schedCourse.ui-draggable-dragging { opacity: 0.3; }
-	td.last { border-bottom: none; }
-	td.first, td.last-col { background-color:#FFF985; border-left:1px solid #515151;	border-right: 1px solid #515151; }
-	td.last { border-bottom: none; }
-	tr { border-left:1px solid #515151; border-right: 1px solid #515151; }
-	table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
+table, .courses { float: left; }
+table { margin-right: 20px; }
+td.last { border-bottom: none; }
+tr { height: 50px; border-left:1px solid #515151; border-right: 1px solid #515151; }
+tr.first { height: 25px; }
+table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
+td { 
+	border-top: none; 
+	border-right: none;
+	border-bottom: 1px solid #515151; 
+	border-left: none;  
+	padding: 0; 
+} 
+td.ui-state-hover { background-color: #FF5F69; }
+td.ui-state-active { border-left: 1px solid #515151; }
+.ui-draggable-dragging { opacity: 0.5; }
+.schedCourse.ui-draggable-dragging { }
+td.last { border-bottom: none; }
+td.first { border-left:1px solid #515151; }
+td.last-col { 
+	background-color: #FFF985; 
+	border-left: 1px solid #515151; 
+	border-right: 1px solid #515151; 
+}
+
 </style>
 <meta http-equiv="content-type" content="text/html; charset=windows-1252"><title>Horaire</title>
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="../css/jquery-ui.min.css">
+<link rel="stylesheet" href="../css/jquery-ui.structure.min.css">
 </head>
 <body>
 <table border="1" cellpadding="5" cellspacing="0" width="80%" height="100%">
 <tbody>
 <tr class="first" align="CENTER">
-<td rowspan="1" colspan="1"></td>
-<td rowspan="1" colspan="1"><input type="text"></td>
-<td rowspan="1" colspan="1"><input type="text"></td>
-<td rowspan="1" colspan="1"><input type="text"></td>
-<td rowspan="1" colspan="1"><input type="text"></td>
-<td rowspan="1" colspan="1"><input type="text"></td>
+<td rowspan="1" colspan="1"><input class="upper" type="text" placeholder="Monday"></td>
+<td rowspan="1" colspan="1"><input class="upper" type="text" placeholder="Tuesday"></td>
+<td rowspan="1" colspan="1"><input class="upper" type="text" placeholder="Wednesday"></td>
+<td rowspan="1" colspan="1"><input class="upper" type="text" placeholder="Thursday"></td>
+<td rowspan="1" colspan="1"><input class="upper" type="text" placeholder="Friday"></td>
+
 <td></td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b><input type="text"></b></td>
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -54,7 +88,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">09:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -62,7 +96,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">10:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -70,7 +104,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">11:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -78,8 +112,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">12:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b><input type="text"></b></td>
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -87,7 +120,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">13:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -95,7 +128,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">14:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -103,7 +136,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">15:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -111,8 +144,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">16:30</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="first last" rowspan="4" colspan="1" height="160"><b><input type="text"></b></td>
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -121,7 +153,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">18:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -129,7 +161,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">19:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="inner"></td>
+<td class="first first inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
 <td class="inner"></td>
@@ -137,7 +169,7 @@ table {margin-right: 20px;}
 <td class="last-col" rowspan="1" colspan="1">20:00</td>
 </tr>
 <tr align="CENTER" valign="CENTER">
-<td class="last inner"></td>
+<td class="first last inner"></td>
 <td class="last inner"></td>
 <td class="last inner"></td>
 <td class="last inner"></td>
@@ -152,6 +184,7 @@ table {margin-right: 20px;}
 
 </ul>
 </div>
+<div class="trash"></div>
 </body>
 <script>
 	var i = 0;
@@ -159,15 +192,30 @@ table {margin-right: 20px;}
 		var no = i++;
 		var course = $('<li><div class="js-course course' +
 		 	' ui-widget-content" data-course="'+ no +'">' +
-			'<input type="text"><br/><input type="color" id="myColor"></div></li>');
+			'<input type="text" placeholder="Title"><br/><input type="color" id="myColor"></div></li>');
 		course.find('.js-course').draggable({ cursorAt: {top: 33, left: 75 } , revert: true });
-		var input = course.find('input[type=text]');
-		input.keyup(function() {
+		course.find('input[type=text]').keyup(function() {
 			$('.schedCourse[data-course="' + no + '"]').find('.js-name').html($(this).val());
+		});
+		course.find('input[type=color]').change(function() {
+			course.find('.js-course').css('background-color', $(this).val());
 		});
 		$('.courses ul').append(course);
 	}
 	$(function() {
+		$('.trash').droppable({
+			accept: '.js-course',
+			activeClass: 'ui-state-active',
+			hoverClass: 'ui-state-hover',
+			drop: function(event, ui) {
+				if (ui.draggable.hasClass('schedCourse'))
+					ui.draggable.remove();
+				else {
+					$('.schedCourse[data-course="' + ui.draggable.data('course') + '"]').remove();
+					ui.draggable.parent().remove();
+				}	
+			}
+		});
 		$('#addCourse').click(addCourse);
 		$('td.inner').droppable({
 			accept: '.js-course',
@@ -183,9 +231,10 @@ table {margin-right: 20px;}
 				else
 					name = ui.draggable.find('input[type=text]').val()
 
-				var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text"><br><input type="text"<br></div>');
+				var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
 				
 				course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true });
+				course.resizable({ grid: 50, minWidth: 181, maxWidth: 181 });
 				$(this).html(course)
 			}
 		});
