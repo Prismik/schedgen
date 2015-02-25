@@ -199,6 +199,7 @@ td.last-col {
 		});
 		course.find('input[type=color]').change(function() {
 			course.find('.js-course').css('background-color', $(this).val());
+			$('.schedCourse[data-course="' + no + '"]').css('background-color', $(this).val());
 		});
 		$('.courses ul').append(course);
 	}
@@ -234,7 +235,7 @@ td.last-col {
 				var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
 				
 				course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true });
-				course.resizable({ grid: 50, minWidth: 181, maxWidth: 181 });
+				course.resizable({ grid: 50,  handles: 's' });
 				$(this).html(course)
 			}
 		});

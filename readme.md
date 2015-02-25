@@ -1,10 +1,14 @@
 # Schedule Generator
 
-After few sessions of university, I came to realize that the schedule generator provided was very bad (and ugly). I always tweaked the html file that the system was giving me and eventualy got tired to do that. This is when I decided that I would make my own schedule generator to simplify this process for any schedules I would have to make from now on.
+After few sessions of university, I came to realize that the schedule generator provided was very bad (and ugly). I always tweaked the html file that the system was giving me and eventually got tired to do so. This is when I decided that I would make my own schedule generator to simplify this process for any schedules I would have to make from now on.
 
 ## Installation
 
 This generator can basically be run from any browser. You will probably need to have access to internet, since I have settled for google's JQuery hosting services.
+
+## Usage
+
+Try to drag, drop and resize stuff and enjoy !
 
 ## Contributing
 
@@ -12,7 +16,7 @@ This generator can basically be run from any browser. You will probably need to 
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request :D
+5. Submit a pull request =D
 
 ## License
 
