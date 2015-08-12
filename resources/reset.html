@@ -188,6 +188,32 @@ td.last-col {
 </body>
 <script>
 	var i = 0;
+	var dropInTrash = function(event, ui) {
+		if (ui.draggable.hasClass('schedCourse'))
+			ui.draggable.remove();
+		else {
+			$('.schedCourse[data-course="' + ui.draggable.data('course') + '"]').remove();
+			ui.draggable.parent().remove();
+		}	
+	};
+
+	var dropInTd = function(event, ui) {
+		var name = '';
+		var id = ui.draggable.data('course');
+		if (ui.draggable.hasClass('schedCourse')) {
+			name = ui.draggable.find('.js-name').html();
+			ui.draggable.remove();
+		}
+		else
+			name = ui.draggable.find('input[type=text]').val()
+
+		var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
+		
+		course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true });
+		course.resizable({ grid: 50,  handles: 's' });
+		$(this).html(course)
+	};
+
 	var addCourse = function() {
 		var no = i++;
 		var course = $('<li><div class="js-course course' +
@@ -203,41 +229,20 @@ td.last-col {
 		});
 		$('.courses ul').append(course);
 	}
+
 	$(function() {
 		$('.trash').droppable({
 			accept: '.js-course',
 			activeClass: 'ui-state-active',
 			hoverClass: 'ui-state-hover',
-			drop: function(event, ui) {
-				if (ui.draggable.hasClass('schedCourse'))
-					ui.draggable.remove();
-				else {
-					$('.schedCourse[data-course="' + ui.draggable.data('course') + '"]').remove();
-					ui.draggable.parent().remove();
-				}	
-			}
+			drop: dropInTrash
 		});
 		$('#addCourse').click(addCourse);
 		$('td.inner').droppable({
 			accept: '.js-course',
 			activeClass: 'ui-state-active',
 			hoverClass: 'ui-state-hover',
-			drop: function(event, ui) {
-				var name = '';
-				var id = ui.draggable.data('course');
-				if (ui.draggable.hasClass('schedCourse')) {
-					name = ui.draggable.find('.js-name').html();
-					ui.draggable.remove();
-				}
-				else
-					name = ui.draggable.find('input[type=text]').val()
-
-				var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
-				
-				course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true });
-				course.resizable({ grid: 50,  handles: 's' });
-				$(this).html(course)
-			}
+			drop: dropInTd
 		});
 	});
 	</script>

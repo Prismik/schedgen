@@ -1,18 +1,71 @@
 (function($, self) {
-	self.reset = function() {
-		var content = '<table border="1" cellpadding="5" cellspacing="0" width="1000px" height="400px"><tbody><tr class="first" align="CENTER"><td rowspan="1" colspan="1" width="8%"></td><td rowspan="1" colspan="1" bgcolor="#FFF985" width="17%"><b>LUNDI</b></td><td rowspan="1" colspan="1" bgcolor="#FFF985" width="17%"><b>MARDI</b></td><td rowspan="1" colspan="1" bgcolor="#FFF985" width="17%"><b>MERCREDI</b></td><td rowspan="1" colspan="1" bgcolor="#FFF985" width="17%"><b>JEUDI</b></td><td rowspan="1" colspan="1" bgcolor="#FFF985" width="17%"><b>VENDREDI</b></td><td></td></tr><tr align="CENTER" valign="CENTER"><td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b>AM</b></td><td rowspan="4" width="18%"></td><td rowspan="4" width="18%"></td><td rowspan="4" width="18%"></td><td rowspan="4" width="18%"></td><td rowspan="4" bgcolor="#D1F486" width="18%"><b>MAT350-10<br>TP<br></b>09:00-12:00<br><b>B-1502</b></td><td class="last-col" rowspan="1" colspan="1">09:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">10:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">11:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">12:00</td></tr><tr align="CENTER" valign="CENTER"><td class="first" rowspan="4" colspan="1" height="160" bgcolor="#FFF985"><b>Midi et PM</b></td><td rowspan="4" bgcolor="#FF5F69" width="18%"><b>LOG320-02<br>Cours<br></b>13:30-16:30<br><b>B-1510</b></td><td rowspan="4" bgcolor="#B0A3FF" width="18%"><b>LOG410-01<br>Cours<br></b>13:30-17:00<br><b>A-1242</b></td><td rowspan="4" bgcolor="#D1F486" width="18%"><b>MAT350-10<br>Cours<br></b>13:30-17:00<br><b>B-1708</b></td><td rowspan="4" bgcolor="#FF5F69" width="18%"><b>LOG320-02<br>TP<br></b>13:30-16:30<br><b>A-1242 / A-3324</b></td><td rowspan="3" bgcolor="#B0A3FF" width="18%"><b>LOG410-01<br>TP<br></b>13:30-15:30<br><b>A-3412</b></td><td class="last-col" rowspan="1" colspan="1">13:30</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">14:30</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">15:30</td></tr><tr align="CENTER" valign="CENTER"><td rowspan="1" colspan="1"><br></td><td class="last-col" rowspan="1" colspan="1">16:30</td></tr><tr align="CENTER" valign="CENTER"><td class="first last" rowspan="5" colspan="1" height="160" bgcolor="#FFF985"><b>Soir</b></td><td rowspan="4" bgcolor="#00CFDE" colspan="1"><b>GTI350-02<br>Cours<br></b>18:00-21:30<br><b>A-4520</b></td><td rowspan="4" colspan="1"><br></td><td rowspan="4" bgcolor="#00CFDE" colspan="1"><b>GTI350-02<br>TP<br></b>18:00-21:00<br><b>A-4420</b></td><td rowspan="4" colspan="1"><br></td><td rowspan="4" colspan="1"><br></td><td class="last-col" rowspan="1" colspan="1">18:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">19:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">20:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last-col" rowspan="1" colspan="1">21:00</td></tr><tr align="CENTER" valign="CENTER"><td class="last" rowspan="1" colspan="1"><br></td><td class="last" rowspan="1" colspan="1"><br></td><td class="last" rowspan="1" colspan="1"><br></td><td class="last" rowspan="1" colspan="1"><br></td><td class="last" rowspan="1" colspan="1"><br></td><td class="last-col last" rowspan="1" colspan="1">22:30</td></tr></tbody></table>'
-		$('.js-schedule').html(content);
-	};
-	self.addCourseTo = function(td, course) {
-		td.html('<b>'+course+'<br><input type-"text"><br></b><input type="time"><input type="time"><br>');
+	  var elementsInColumn = function(column) {
+    var data = [];
+    $(".js-schedule table tr").each(function(rowIndex) {
+      $(this).find("td").each(function(cellIndex) {
+          if (cellIndex == column)
+            data.push($(this));
+        });
+    });
+
+    return data;
+  };
+
+  var setCourseRows = function(element, from, to) {
+    var column = element.parent().index();
+    var $tr = element.closest('tr');
+    var row = $tr.index();
+
+    var tdInColumn = elementsInColumn(column);
+    for (var i = 1; i != tdInColumn.length - 1; i++) {
+      if (i > from && i < to)
+        tdInColumn[i].css("display", "none");
+      else
+        tdInColumn[i].css("display", "table-cell");
+    }
+    console.log('from -> ' + from)
+    console.log('to -> ' + to)
+
+    var size = to - from
+    console.log('rows -> ' + size)
+    element.parent().attr('rowspan', size);
+  };
+
+  var dropInTd = function(event, ui) {
+		var name = '';
+		var id = ui.draggable.data('course');
+		if (ui.draggable.hasClass('schedCourse')) {
+			name = ui.draggable.find('.js-name').html();
+			ui.draggable.remove();
+		}
+		else
+			name = ui.draggable.find('input[type=text]').val()
+
+		var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
+		
+		course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true });
+		course.resizable({ grid: 61,  handles: 's', 
+      stop: function(event, ui) {
+        var row = ui.element.parent().parent().index();
+        var rowTaken = Math.floor(ui.size.height / 61 + 0.99);
+        setCourseRows(ui.element, row, row + rowTaken);
+      }
+    });
+
+		$(this).html(course);
 	};
 
-	$('td.inner').droppable({
-    accept: '.course',
-    activeClass: 'ui-state-active',
-    hoverClass: 'ui-state-hover',
-    drop: function(event, ui) {
-      self.addCourseTo($(this), ui.draggable.find('input').val());
-    }
-  });
+	self.reset = function() {
+		$('td.inner').html(''); // Find all tds and reset them
+		$('.courses ul').html(''); // Find list and clean it
+	};
+
+	self.init = function() {
+		$('td.inner').droppable({
+			accept: '.js-course',
+			activeClass: 'ui-state-active',
+			hoverClass: 'ui-state-hover',
+			drop: dropInTd
+		});
+	};
 })(jQuery, this.Schedule = { });
