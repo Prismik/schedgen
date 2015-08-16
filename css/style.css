@@ -1,14 +1,14 @@
-body { font-family: Tahoma; color: #515151; background-color: white; }
+body { margin-top: 0px; font-family: Tahoma; color: #515151; background-color: rgb(249, 249, 249); }
 input[type="color"] { width: 131px; margin-top: 5px; }
 input { text-align: center; }
 input.upper { text-transform: uppercase; }
-
+h2 { margin: 0; }
 .trash { 
   float: left; 
   background-color: rgb(255, 80, 80); 
-  width: 17%; height: 60px;  
+  width: 100%; height: 52px;  
   background-image: url(../resources/trash-close.png); 
-  background-size: 80px 60px; 
+  background-size: 60px 52px; 
   background-position: 50% 0px;
   background-repeat: no-repeat; 
 }
@@ -18,15 +18,17 @@ input.upper { text-transform: uppercase; }
   background-repeat: no-repeat;
 }
 
-.courses { width: 18%; height: 613px; }  
+.courses { overflow: auto; width: 218px; height: 559px; background-color: #FFF; border: solid 1px rgb(232, 232, 232); margin-right: 10px; margin-bottom: 10px; }  
 .courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
+.courses ul li { width: 161px; height: 73px; margin-bottom: 10px; margin-left: 27px; }
 .schedCourse { cursor: move; height: 100%; background-color: #D1F486; }
-.course { border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
-table, .courses { float: left; }
-table { margin-right: 20px; border-bottom: solid 1px #D1D1D1; }
+.course { width: 140px; border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
+.course input { width: 131px; }
+table, .courses { float: right; }
+table { border-bottom: solid 1px #D1D1D1; background-color: #FFF; }
 td.last { border-bottom: none; }
 tr { height: 50px; border-left:1px solid #D1D1D1; border-right: 1px solid #D1D1D1; }
-tr.first { height: 20px; }
+tr.first { height: 20px; background-color: rgb(249, 249, 249); }
 tr.first td { height: 20px; }
 tr.last { border-bottom: solid 1px #D1D1D1; }
 table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
@@ -55,4 +57,4 @@ td.last-col {
   border-right: 1px solid #D1D1D1; 
 }
 td.last-col.last { border-bottom: none; }
-.controls { position: relative; } 
+.controls { text-align: center; width: 249px; float: right; position: absolute; left: 0; background-color: rgb(249, 249, 249); } 
