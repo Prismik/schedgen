@@ -4,18 +4,18 @@ input { text-align: center; }
 input.upper { text-transform: uppercase; }
 
 .trash { 
-	float: right; 
-	background-color: red; 
-	width: 80px; height: 70px;  
-	background-image: url(../resources/trash-close.png); 
-	background-size: 80px 60px; 
-	background-repeat: no-repeat; 
-	padding: 0.5em;
+  float: right; 
+  background-color: red; 
+  width: 80px; height: 70px;  
+  background-image: url(../resources/trash-close.png); 
+  background-size: 80px 60px; 
+  background-repeat: no-repeat; 
+  padding: 0.5em;
 }
 .trash.ui-state-hover { 
-	background-image: url(../resources/trash-open.png); 
-	background-size: 80px 60px; 
-	background-repeat: no-repeat;
+  background-image: url(../resources/trash-open.png); 
+  background-size: 80px 60px; 
+  background-repeat: no-repeat;
 }
 
 .courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
@@ -29,11 +29,11 @@ tr.first { height: 25px; }
 table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
 td { 
   position: relative;
-	border-top: none; 
-	border-right: none;
-	border-bottom: 1px solid #515151; 
-	border-left: none;  
-	padding: 0; 
+  border-top: none; 
+  border-right: none;
+  border-bottom: 1px solid #515151; 
+  border-left: none;  
+  padding: 0; 
 } 
 td[rowspan="1"] .schedCourse input { display: none; }
 .schedCourse .info { font-size: 9px; font-weight: normal; height: 10px; }
@@ -46,7 +46,7 @@ td.ui-state-active { border-left: 1px solid #515151; }
 td.last { border-bottom: none; }
 td.first { border-left:1px solid #515151; }
 td.last-col { 
-	background-color: #FFF985; 
-	border-left: 1px solid #515151; 
-	border-right: 1px solid #515151; 
+  background-color: #FFF985; 
+  border-left: 1px solid #515151; 
+  border-right: 1px solid #515151; 
 }
