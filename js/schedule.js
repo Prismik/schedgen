@@ -83,7 +83,7 @@
     else
       name = ui.draggable.find('input[type=text]').val()
 
-    var course = $('<div class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
+    var course = $('<div style="height: 50px" class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
     
     if (self.active == null)
       self.active = $(this);

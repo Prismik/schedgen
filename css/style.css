@@ -28,16 +28,21 @@ tr { height: 50px; border-left:1px solid #515151; border-right: 1px solid #51515
 tr.first { height: 25px; }
 table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
 td { 
+  position: relative;
 	border-top: none; 
 	border-right: none;
 	border-bottom: 1px solid #515151; 
 	border-left: none;  
 	padding: 0; 
 } 
+td[rowspan="1"] .schedCourse input { display: none; }
+.schedCourse .info { font-size: 9px; font-weight: normal; height: 10px; }
+td:not([rowspan="1"]) .schedCourse .info { display: none; }
 td.ui-state-hover { background-color: #FF5F69; }
 td.ui-state-active { border-left: 1px solid #515151; }
 .ui-draggable-dragging { opacity: 0.5; }
 .schedCourse.ui-draggable-dragging { }
+.schedCourse.ui-resizable-resizing { position: absolute !important; top: 0; left: 0; width: 100%; z-index: 999;}
 td.last { border-bottom: none; }
 td.first { border-left:1px solid #515151; }
 td.last-col { 
