@@ -4,13 +4,13 @@ input { text-align: center; }
 input.upper { text-transform: uppercase; }
 
 .trash { 
-  float: right; 
-  background-color: red; 
-  width: 80px; height: 70px;  
+  float: left; 
+  background-color: rgb(255, 80, 80); 
+  width: 17%; height: 60px;  
   background-image: url(../resources/trash-close.png); 
   background-size: 80px 60px; 
+  background-position: 50% 0px;
   background-repeat: no-repeat; 
-  padding: 0.5em;
 }
 .trash.ui-state-hover { 
   background-image: url(../resources/trash-open.png); 
@@ -18,20 +18,24 @@ input.upper { text-transform: uppercase; }
   background-repeat: no-repeat;
 }
 
+.courses { width: 18%; height: 613px; }  
 .courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
 .schedCourse { cursor: move; height: 100%; background-color: #D1F486; }
 .course { border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
 table, .courses { float: left; }
-table { margin-right: 20px; }
+table { margin-right: 20px; border-bottom: solid 1px #D1D1D1; }
 td.last { border-bottom: none; }
-tr { height: 50px; border-left:1px solid #515151; border-right: 1px solid #515151; }
-tr.first { height: 25px; }
+tr { height: 50px; border-left:1px solid #D1D1D1; border-right: 1px solid #D1D1D1; }
+tr.first { height: 20px; }
+tr.first td { height: 20px; }
+tr.last { border-bottom: solid 1px #D1D1D1; }
 table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
 td { 
+  height: 49px;
   position: relative;
   border-top: none; 
   border-right: none;
-  border-bottom: 1px solid #515151; 
+  border-bottom: 1px solid #D1D1D1; 
   border-left: none;  
   padding: 0; 
 } 
@@ -42,11 +46,13 @@ td.ui-state-hover { background-color: #FF5F69; }
 td.ui-state-active { border-left: 1px solid #515151; }
 .ui-draggable-dragging { opacity: 0.5; }
 .schedCourse.ui-draggable-dragging { }
-.schedCourse.ui-resizable-resizing { position: absolute !important; top: 0; left: 0; width: 100%; z-index: 999;}
-td.last { border-bottom: none; }
-td.first { border-left:1px solid #515151; }
+.schedCourse.ui-resizable-resizing { position: absolute !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;}
+td.first { border-left: 1px solid #D1D1D1; }
 td.last-col { 
   background-color: #FFF985; 
-  border-left: 1px solid #515151; 
-  border-right: 1px solid #515151; 
+  border-bottom: 1px solid #B1B1B1;
+  border-left: 1px solid #D1D1D1; 
+  border-right: 1px solid #D1D1D1; 
 }
+td.last-col.last { border-bottom: none; }
+.controls { position: relative; } 

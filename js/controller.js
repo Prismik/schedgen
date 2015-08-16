@@ -7,6 +7,8 @@ var dropInTrash = function(event, ui) {
     $('.schedCourse[data-course="' + ui.draggable.data('course') + '"]').remove();
     ui.draggable.parent().remove();
   }  
+
+  Schedule.refresh();
 };
 
 var addCourse = function() {

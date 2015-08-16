@@ -1,24 +1,12 @@
 (function($, self) {
   self.active = null;
+  self.cellHeight = 50;
 
-  var elementsInColumn = function(column) {
+  var cellsInColumn = function(column) {
     var data = [];
     $(".js-schedule table tr").each(function(rowIndex) {
       $(this).find("td").each(function(cellIndex) {
           if (cellIndex == column)
-            data.push($(this));
-        });
-    });
-
-    return data;
-  };
-
-  // TODO Refactor
-  var elementsInColumnWithCourse = function(column) {
-    var data = [];
-    $(".js-schedule table tr").each(function(rowIndex) {
-      $(this).find("td").each(function(cellIndex) {
-          if (cellIndex == column && $(this).children().length > 0)
             data.push($(this));
         });
     });
@@ -35,42 +23,36 @@
   };
 
   var refreshColumn = function(column) {
-    var tdInColumn = elementsInColumn(column);
+    var cells = cellsInColumn(column);
     var rowTaken = 0;
     var skip = 0;
-    for (var i = 1; i != tdInColumn.length; i++) {
+    for (var i = 1; i != cells.length; i++) {
       if (--skip <= 0) {
-        var rowspan = tdInColumn[i].attr('rowspan');
+        var rowspan = cells[i].attr('rowspan');
         rowTaken = typeof rowspan === 'undefined' || isNaN(rowspan) ? 0 : rowspan;
-        if (tdInColumn[i].children().length != 0 && rowTaken != 0) {
-          tdInColumn[i].css("display", "table-cell");
-          tdInColumn[i].attr('rowspan', rowspan);
+
+        cells[i].css("display", "table-cell");
+        if (cells[i].children().length != 0 && rowTaken != 0) {
+          cells[i].attr('rowspan', rowspan);
           skip = rowTaken;
         }
-        else {
-          tdInColumn[i].css("display", "table-cell");
-          tdInColumn[i].attr('rowspan', 1);
-        }
+        else
+          cells[i].attr('rowspan', 1);
       }
       else
-        tdInColumn[i].css("display", "none");
+        cells[i].css("display", "none");
     }
   }
 
-  var setCourseRows = function(element, from, to) {
-    if (self.active != null) {
-      var fromLocation = cellLocation(self.active);
-    }
-
+  var refresh = function(element, from, to) {
     var toLocation = cellLocation(element);
+    if (self.active != null)
+      var fromLocation = cellLocation(self.active);
 
-    var size = to - from
-    element.attr('rowspan', size);
-
+    element.attr('rowspan', to - from);
+    refreshColumn(toLocation.x)
     if (self.active != null && fromLocation.x != toLocation.x)
       refreshColumn(fromLocation.x)
-    
-    refreshColumn(toLocation.x)
   };
 
   var dropInTd = function(event, ui) {
@@ -91,22 +73,34 @@
     course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true, 
       start: function(event, ui) {
         self.active = ui.helper.parent();
-      } 
+      }
     });
 
-    course.resizable({ grid: 50,  handles: 's', 
+    course.resizable({ grid: self.cellHeight,  handles: 's', 
+      resize: function(event, ui) {
+        // TODO if (ui.size.height < maxSize)       
+        // ui.size.height = 
+      },
+      start: function(event, ui) {
+        // TODO find the next course in the row, compute the diff between their locations, assign a value to maxSize for the current resizable    
+      },
       stop: function(event, ui) {
         var row = ui.element.parent().parent().index();
-        var rowTaken = Math.floor(ui.size.height / 50 + 0.99);
-        setCourseRows(ui.element.parent(), row, row + rowTaken);
+        var rowTaken = Math.floor(ui.size.height / self.cellHeight + 0.99);
+        refresh(ui.element.parent(), row, row + rowTaken);
       }
     });
 
     $(this).html(course);
 
     var row = $(this).parent().index();
-    var rowTaken = Math.floor($(this).size.height / 61 + 0.99);
-    setCourseRows($(this), row, row + rowTaken);
+    var rowTaken = Math.floor($(this).size.height / self.cellHeight + 0.99);
+    refresh($(this), row, row + rowTaken);
+  };
+
+  self.refresh = function() {
+    for (var i = 0; i != 5; i++)
+      refreshColumn(i);
   };
 
   self.reset = function() {
