@@ -57,15 +57,19 @@
 
   var dropInTd = function(event, ui) {
     var name = '';
+    var color ='';
     var id = ui.draggable.data('course');
     if (ui.draggable.hasClass('schedCourse')) {
       name = ui.draggable.find('.js-name').html();
+      color = ui.draggable.css('background-color');
       ui.draggable.remove();
     }
-    else
+    else {
       name = ui.draggable.find('input[type=text]').val()
-
-    var course = $('<div style="height: 50px" class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
+      color = ui.draggable.css('background-color')
+    }
+    
+    var course = $('<div style="height: 50px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div>');
     
     if (self.active == null)
       self.active = $(this);

@@ -18,11 +18,11 @@ h2 { margin: 0; }
   background-repeat: no-repeat;
 }
 
-.courses { overflow: auto; width: 218px; height: 559px; background-color: #FFF; border: solid 1px rgb(232, 232, 232); margin-right: 10px; margin-bottom: 10px; }  
+.courses { width: 218px; height: 559px; background-color: #FFF; border: solid 1px rgb(232, 232, 232); margin-right: 10px; margin-bottom: 10px; }  
 .courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
 .courses ul li { width: 161px; height: 73px; margin-bottom: 10px; margin-left: 27px; }
-.schedCourse { cursor: move; height: 100%; background-color: #D1F486; }
-.course { width: 140px; border: solid 1px black; padding: 10px; margin-bottom: 20px; cursor: move; }
+.schedCourse { cursor: move; height: 100%; background-color: #D1F486; z-index: 9999; }
+.course { width: 140px; border: solid 1px #D1D1D1; padding: 10px; margin-bottom: 20px; cursor: move; }
 .course input { width: 131px; }
 table, .courses { float: right; }
 table { border-bottom: solid 1px #D1D1D1; background-color: #FFF; }
@@ -45,9 +45,9 @@ td[rowspan="1"] .schedCourse input { display: none; }
 .schedCourse .info { font-size: 9px; font-weight: normal; height: 10px; }
 td:not([rowspan="1"]) .schedCourse .info { display: none; }
 td.ui-state-hover { background-color: #FF5F69; }
-td.ui-state-active { border-left: 1px solid #515151; }
+td.ui-state-active { border-left: 1px solid #D1D1D1; }
 .ui-draggable-dragging { opacity: 0.5; }
-.schedCourse.ui-draggable-dragging { }
+.schedCourse.ui-draggable-dragging { z-index: 99999; }
 .schedCourse.ui-resizable-resizing { position: absolute !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 999;}
 td.first { border-left: 1px solid #D1D1D1; }
 td.last-col { 
