@@ -1,6 +1,12 @@
 # Schedule Generator
 
-After few sessions of university, I came to realize that the schedule generator provided was very bad (and ugly). I always tweaked the html file that the system was giving me and eventually got tired to do so. This is when I decided that I would make my own schedule generator to simplify this process for any schedules I would have to make from now on.
+This tool helps you make a school schedule with a wysiwyg approach. There are only a few steps:
+
+1. Add a course to the list 
+2. Name it and choose a color
+4. Drag it into the schedule grid where the course starts
+5. Expand the course using the bottom handle up to where the course ends
+6. You have an amazing schedule
 
 ## Installation
 
