@@ -1,12 +1,7 @@
 # Schedule Generator
 
-This tool helps you make a school schedule with a wysiwyg approach. There are only a few steps:
+This tool helps you make a school schedule with a wysiwyg approach. There are only a few steps in order to have a nice schedule that will work on your computer, cellphones or even with your favorite printer.
 
-1. Add a course to the list 
-2. Name it and choose a color
-4. Drag it into the schedule grid where the course starts
-5. Expand the course using the bottom handle up to where the course ends
-6. You have an amazing schedule
 
 ## Installation
 
@@ -14,7 +9,12 @@ This generator can basically be run from any browser. You will probably need to 
 
 ## Usage
 
-Try to drag, drop and resize stuff and enjoy !
+1. Add a course to the list 
+2. Name it and choose a color for it
+4. Drag the course into the schedule grid
+5. Expand the course using the bottom handle up to where the course ends
+6. Repeat this process for all of your courses
+7. You have an amazing schedule
 
 ## Contributing
 
