@@ -34,3 +34,4 @@ $('.trash').droppable({
   drop: dropInTrash
 });
 $('#addCourse').click(addCourse);
+$('#clear').click(Schedule.reset);

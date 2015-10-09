@@ -2,6 +2,7 @@ body { margin-top: 0px; font-family: Tahoma; color: #515151; background-color: r
 input[type="color"] { width: 131px; margin-top: 5px; }
 input { text-align: center; }
 input.upper { text-transform: uppercase; }
+.wrapper { min-width: 1206px; }
 h2 { margin: 0; }
 .trash { 
   float: left; 
@@ -17,18 +18,17 @@ h2 { margin: 0; }
   background-size: 80px 60px; 
   background-repeat: no-repeat;
 }
-#addCourse { margin-right: 27px; }
-#clear { margin-left: 6px; margin-right: -8px; } 
+#addCourse { margin-right: 33px; }
 #addCourse, #clear { margin-bottom: 5px; margin-top: 5px; color: rgb(81, 81, 81); outline-width: 0; cursor: pointer; font-weight: bold; border: none; background-color: rgb(46, 204, 113); width: 90px; height: 30px; }
 #addCourse:hover, #clear:hover { background-color: rgb(40, 190, 104); }
 .courses { width: 218px; height: 540px; background-color: #FFF; border: solid 1px rgb(232, 232, 232); margin-right: 10px; margin-bottom: 10px; }  
 .courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
 .courses ul li { width: 161px; height: 73px; margin-bottom: 10px; margin-left: 27px; }
 .schedCourse { cursor: move; height: 100%; background-color: #D1F486; z-index: 9999; }
-.course { width: 140px; border: solid 1px #D1D1D1; padding: 10px; margin-bottom: 20px; cursor: move; }
+.course { width: 140px; border: solid 1px #D1D1D1; padding: 10px; margin-bottom: 20px; cursor: move; z-index: 99999; }
 .course input { width: 131px; }
 table, .courses { float: right; }
-table { border-bottom: solid 1px #D1D1D1; background-color: #FFF; }
+table { border-bottom: solid 1px #D1D1D1; background-color: #FFF; min-width: 966px; }
 td.last { border-bottom: none; }
 tr { height: 50px; border-left:1px solid #D1D1D1; border-right: 1px solid #D1D1D1; }
 tr.first { height: 20px; background-color: rgb(249, 249, 249); }
@@ -60,4 +60,4 @@ td.last-col {
   border-right: 1px solid #D1D1D1; 
 }
 td.last-col.last { border-bottom: none; }
-.controls { text-align: center; width: 249px; float: right; position: absolute; left: 0; background-color: rgb(249, 249, 249); } 
+.controls { text-align: center; width: 240px; float: left; left: 0; background-color: rgb(249, 249, 249); } 

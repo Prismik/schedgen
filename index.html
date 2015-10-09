@@ -12,7 +12,18 @@
     <script src="js/exporter.js"></script>
   </head>
   <body>
-    <div class="js-schedule">
+    <div class="wrapper js-schedule">
+      <div class="controls">
+        <h2>Courses</h2>
+        <button id="addCourse">Add</button>
+        <button id="clear">Reset</button>
+        <div class="courses">
+          <ul>
+          
+          </ul>
+        </div>
+        <div class="trash"></div>
+      </div>
     <table border="1" cellpadding="5" cellspacing="0" width="80%" height="100%">
     <tbody>
     <tr class="first" align="CENTER">
@@ -130,17 +141,6 @@
     <td class="last last-col" rowspan="1" colspan="1">21:00</td>
     </tr>
     </tbody></table>
-    <div class="controls">
-      <h2>Courses</h2>
-      <button id="addCourse">Add</button>
-      <button id="clear">Reset</button>
-      <div class="courses">
-        <ul>
-          
-        </ul>
-      </div>
-      <div class="trash"></div>
-    </div>
     </div>
   </body>
   <script src="js/controller.js"></script>
