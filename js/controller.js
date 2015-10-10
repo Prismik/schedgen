@@ -13,17 +13,30 @@ var dropInTrash = function(event, ui) {
 
 var addCourse = function() {
   var no = i++;
+  var picker = ColorPickerFactory.create(['#ABC', '#111', '#AE2567', '#A21A21', '#DD55AA', '#EEAA22'],
+    function(newColor) {
+      course.find('.js-course').css('background-color', newColor);
+      $('.schedCourse[data-course="' + no + '"]').css('background-color', newColor); 
+    });
+
   var course = $('<li><div class="js-course course' +
     ' ui-widget-content" data-course="'+ no +'">' +
-    '<input type="text" placeholder="Title"><br/><input type="color" id="myColor"></div></li>');
+    '<input type="text" placeholder="Title"><br/><button class="myColor">Color</button></li>');
+  
   course.find('.js-course').draggable({ cursorAt: {top: 33, left: 75 } , revert: true });
+  picker.bindTo($('.course'));
+
+  // Listen to name changes
   course.find('input[type=text]').keyup(function() {
     $('.schedCourse[data-course="' + no + '"]').find('.js-name').html($(this).val());
   });
-  course.find('input[type=color]').change(function() {
-    course.find('.js-course').css('background-color', $(this).val());
-    $('.schedCourse[data-course="' + no + '"]').css('background-color', $(this).val());
+  
+  // Listen to color changes
+  var colorBtn = course.find('.myColor');
+  colorBtn.click(function() {
+    picker.show('n-w', 'ease-in');
   });
+
   $('.courses ul').append(course);
 };
 

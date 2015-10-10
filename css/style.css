@@ -61,3 +61,20 @@ td.last-col {
 }
 td.last-col.last { border-bottom: none; }
 .controls { text-align: center; width: 240px; float: left; left: 0; background-color: rgb(249, 249, 249); } 
+
+/* Color Picker */
+.allColors {
+  border: none;
+  width: 225px; height: 50px;
+  position: absolute;
+  z-index: 9999999999;
+}
+
+.colorNode {
+  cursor: pointer;
+  margin-top: -3px !important;
+  margin: 0px;
+  display: inline-block;
+  border: none;
+  width: 75px; height: 25px;
+}
