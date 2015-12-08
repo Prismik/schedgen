@@ -1,13 +1,16 @@
 (function($, self) {
-self.create = function(colors, onColorChange) {
+self.create = function(colors, colorDidChange) {
   var colorPicker = { };
   colorPicker.currentColor = "#FFFFFF";
   colorPicker.colors = $.unique(colors) || [];
   colorPicker.container = $('<div class="allColors"></div>');
-  colorPicker.onColorChange = onColorChange || function() { }
+  colorPicker.colorDidChange = colorDidChange || function(color) { }
   
   colorPicker.show = function(anchor, animation) {
     animation = animation || 'ease-in';
+
+    console.log("didShow");
+
     // Use anchor as the starting point for the show animation
     // container should be positioned absolute
     colorPicker.container.css('display', 'block');
@@ -26,15 +29,18 @@ self.create = function(colors, onColorChange) {
   };
 
   colorPicker.select = function(color) {
-    // TODO Refactor and keep reference to node instead of just the color 
     var previous = colorPicker.container.find('[data-color="' + colorPicker.currentColor + '"]');
     previous.addClass('unactive');
     previous.removeClass('active');
-
-    currentColor = color;
+    
+    var color = color.data('color');
+    colorPicker.currentColor = color;
+    
     var active = colorPicker.container.find('[data-color="' + color + '"]');
     active.addClass('active');
     active.removeClass('unactive');
+
+    colorPicker.colorDidChange(colorPicker.currentColor);
     colorPicker.hide();
   };  
 
@@ -44,7 +50,9 @@ self.create = function(colors, onColorChange) {
 
   for (var i = 0; i != colors.length; i++) {
     var colorBlock = $('<div style="background-color:' + colorPicker.colors[i] + '" data-color="' + colorPicker.colors[i] + '" class="colorNode unactive"></div>');
-    colorBlock.click(colorPicker.select(colorPicker.colors[i]));
+    colorBlock.click(function () {
+      colorPicker.select($(this));
+    });
     colorPicker.container.append(colorBlock); 
   }
   

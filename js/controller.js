@@ -14,9 +14,9 @@ var dropInTrash = function(event, ui) {
 var addCourse = function() {
   var no = i++;
   var picker = ColorPickerFactory.create(['#ABC', '#111', '#AE2567', '#A21A21', '#DD55AA', '#EEAA22'],
-    function(newColor) {
-      course.find('.js-course').css('background-color', newColor);
-      $('.schedCourse[data-course="' + no + '"]').css('background-color', newColor); 
+    function(color) {
+      course.find('.js-course').css('background-color', color);
+      $('.schedCourse[data-course="' + no + '"]').css('background-color', color); 
     });
 
   var course = $('<li><div class="js-course course' +
@@ -24,7 +24,7 @@ var addCourse = function() {
     '<input type="text" placeholder="Title"><br/><button class="myColor">Color</button></li>');
   
   course.find('.js-course').draggable({ cursorAt: {top: 33, left: 75 } , revert: true });
-  picker.bindTo($('.course'));
+  picker.bindTo(course);
 
   // Listen to name changes
   course.find('input[type=text]').keyup(function() {
