@@ -13,7 +13,9 @@ var dropInTrash = function(event, ui) {
 
 var addCourse = function() {
   var no = i++;
-  var picker = ColorPickerFactory.create(['#ABC', '#111', '#AE2567', '#A21A21', '#DD55AA', '#EEAA22'],
+
+  // Create a picker and pass it a colorDidChange handler
+  var picker = ColorPickerFactory.create(['#ABC', '#D1F486', '#FF5F69', '#B0A3FF', '#DD55AA', '#00CFDE'],
     function(color) {
       course.find('.js-course').css('background-color', color);
       $('.schedCourse[data-course="' + no + '"]').css('background-color', color); 
@@ -31,7 +33,7 @@ var addCourse = function() {
     $('.schedCourse[data-course="' + no + '"]').find('.js-name').html($(this).val());
   });
   
-  // Listen to color changes
+  // Listen to color button pressr
   var colorBtn = course.find('.myColor');
   colorBtn.click(function() {
     picker.show('n-w', 'ease-in');
