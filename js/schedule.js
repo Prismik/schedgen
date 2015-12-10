@@ -81,7 +81,7 @@
     if (self.active == null)
       self.active = $(this);
 
-    course.draggable({ cursorAt: {top: 38, left: 75 }, revert: true, 
+    course.draggable({ cursorAt: {top: 3, left: 75 }, revert: true, 
       start: function(event, ui) {
         self.active = ui.helper.parent();
       }
@@ -106,9 +106,8 @@
     $(this).html(course);
 
     var row = $(this).parent().index();
-    //var rowTaken = Math.floor($(this).size.height / self.cellHeight + 0.99);
-    var rowTaken = rows;
-    refresh($(this), row, row + rowTaken);
+    // The rows taken are detirmined by the data element or 1 by default
+    refresh($(this), row, row + rows);
   };
 
   self.refresh = function() {
@@ -124,6 +123,7 @@
   self.init = function() {
     $('td.inner').droppable({
       accept: '.js-course',
+      tolerance: 'pointer',
       activeClass: 'ui-state-active',
       hoverClass: 'ui-state-hover',
       drop: dropInTd
