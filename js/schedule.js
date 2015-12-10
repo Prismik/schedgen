@@ -50,6 +50,7 @@
       var fromLocation = cellLocation(self.active);
 
     element.attr('rowspan', to - from);
+    
     refreshColumn(toLocation.x)
     if (self.active != null && fromLocation.x != toLocation.x)
       refreshColumn(fromLocation.x)
@@ -60,12 +61,14 @@
     var color = '';
     var what = '';
     var where = '';
+    var rows = 1;
     var id = ui.draggable.data('course');
     if (ui.draggable.hasClass('schedCourse')) {
       name = ui.draggable.find('.js-name').html();
       color = ui.draggable.css('background-color');
       what = ui.draggable.find('.js-what').val();
       where = ui.draggable.find('.js-where').val();
+      rows = ui.draggable.data('rows'); 
       ui.draggable.remove();
     }
     else {
@@ -73,7 +76,7 @@
       color = ui.draggable.css('background-color')
     }
     
-    var course = $('<div style="height: 50px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><div class="inner"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input class="js-what" type-"text" placeholder="What ?" value="'+what+'"><br><input class="js-where" type="text" placeholder="Where ?" value="'+where+'"><br></div></div>');
+    var course = $('<div data-rows="'+rows+'" style="height: '+rows*self.cellHeight+'px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><div class="inner"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input class="js-what" type-"text" placeholder="What ?" value="'+what+'"><br><input class="js-where" type="text" placeholder="Where ?" value="'+where+'"><br></div></div>');
     
     if (self.active == null)
       self.active = $(this);
@@ -95,6 +98,7 @@
       stop: function(event, ui) {
         var row = ui.element.parent().parent().index();
         var rowTaken = Math.floor(ui.size.height / self.cellHeight + 0.99);
+        $(ui.element).data('rows', rowTaken);
         refresh(ui.element.parent(), row, row + rowTaken);
       }
     });
@@ -102,7 +106,8 @@
     $(this).html(course);
 
     var row = $(this).parent().index();
-    var rowTaken = Math.floor($(this).size.height / self.cellHeight + 0.99);
+    //var rowTaken = Math.floor($(this).size.height / self.cellHeight + 0.99);
+    var rowTaken = rows;
     refresh($(this), row, row + rowTaken);
   };
 
