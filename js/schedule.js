@@ -57,11 +57,15 @@
 
   var dropInTd = function(event, ui) {
     var name = '';
-    var color ='';
+    var color = '';
+    var what = '';
+    var where = '';
     var id = ui.draggable.data('course');
     if (ui.draggable.hasClass('schedCourse')) {
       name = ui.draggable.find('.js-name').html();
       color = ui.draggable.css('background-color');
+      what = ui.draggable.find('.js-what').val();
+      where = ui.draggable.find('.js-where').val();
       ui.draggable.remove();
     }
     else {
@@ -69,7 +73,7 @@
       color = ui.draggable.css('background-color')
     }
     
-    var course = $('<div style="height: 50px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><div class="inner"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input type-"text" placeholder="What ?"><br><input type="text" placeholder="Where ?"><br></div></div>');
+    var course = $('<div style="height: 50px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><div class="inner"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input class="js-what" type-"text" placeholder="What ?" value="'+what+'"><br><input class="js-where" type="text" placeholder="Where ?" value="'+where+'"><br></div></div>');
     
     if (self.active == null)
       self.active = $(this);

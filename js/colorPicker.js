@@ -6,6 +6,11 @@ self.create = function(colors, colorDidChange) {
   colorPicker.container = $('<div class="allColors"></div>');
   colorPicker.colorDidChange = colorDidChange || function(color) { }
   
+  // By default, autohide the picker when we click anywhere.
+  $(document).get(0).addEventListener('click', function(event) {
+    colorPicker.hide();
+  }, true);
+
   colorPicker.show = function(anchor, animation) {
     animation = animation || 'ease-in';
 

@@ -25,7 +25,11 @@ var addCourse = function() {
     ' ui-widget-content" data-course="'+ no +'">' +
     '<input type="text" placeholder="Title"><br/><button class="myColor">Color</button></li>');
   
-  course.find('.js-course').draggable({ cursorAt: {top: 33, left: 75 } , revert: true });
+  // We don't want the picker shown during a drag
+  course.find('.js-course').draggable({ drag: function() {
+      picker.hide();
+    }, 
+    cursorAt: {top: 33, left: 75 } , revert: true });
   picker.bindTo(course);
 
   // Listen to name changes
@@ -33,11 +37,11 @@ var addCourse = function() {
     $('.schedCourse[data-course="' + no + '"]').find('.js-name').html($(this).val());
   });
   
-  // Listen to color button pressr
+  // Listen to color button press
   var colorBtn = course.find('.myColor');
-  colorBtn.click(function() {
+  colorBtn.get(0).addEventListener('click', function(event) {
     picker.show('n-w', 'ease-in');
-  });
+  }, true);
 
   $('.courses ul').append(course);
 };
