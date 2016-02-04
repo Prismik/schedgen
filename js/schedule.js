@@ -1,23 +1,45 @@
 (function($, self) {
   self.active = null;
-  self.cellHeight = 50;
+  self.cellHeight = 25;
 
   var cellsInColumn = function(column) {
     var data = [];
     $(".js-schedule table tr").each(function(rowIndex) {
       $(this).find("td").each(function(cellIndex) {
-          if (cellIndex == column)
-            data.push($(this));
-        });
+        if (cellIndex == column)
+          data.push($(this));
+      });
     });
 
     return data;
   };
+ 
+  var gapBeforeNextCell = function(row, column) {
+    var gap = 0;
+    var cell = null;
+    $('.js-schedule table tr').each(function(rowIndex) {
+      if (cell != null)
+        return false;
+
+      if (rowIndex > row) {
+        $(this).find('td').each(function(cellIndex) {
+          if (cellIndex == column && $(this).children().length > 0) {
+            cell = $(this);
+            return false;
+          }
+        });
+        if (cell == null) 
+          gap++;
+      }
+    });
+   
+    return gap;
+  };
 
   var cellLocation = function(element) {
     var column = element.index();
-    var $tr = element.closest('tr');
-    var row = $tr.index();
+    var tr = element.closest('tr');
+    var row = tr.index();
 
     return { x: column, y: row };
   };
@@ -93,10 +115,12 @@
         // ui.size.height = 
       },
       start: function(event, ui) {
-        // TODO find the next course in the row, compute the diff between their locations, assign a value to maxSize for the current resizable    
+        var location = cellLocation(ui.element.parent()); // ?  
+        var diff = (1 + gapBeforeNextCell(location.y, location.x)) * self.cellHeight;
+        course.resizable('option', 'maxHeight', diff);
       },
       stop: function(event, ui) {
-        var row = ui.element.parent().parent().index();
+        var row = ui.element.parent().parent().index(); // ?
         var rowTaken = Math.floor(ui.size.height / self.cellHeight + 0.99);
         $(ui.element).data('rows', rowTaken);
         refresh(ui.element.parent(), row, row + rowTaken);
@@ -122,7 +146,13 @@
 
   self.init = function() {
     $('td.inner').droppable({
-      accept: '.js-course',
+      accept: function(element) {
+        if (element.hasClass('.js-course')) {
+          // TODO Check for any overlaps and refuse drop if one or more occur.
+        }
+
+        return false;
+      },
       tolerance: 'pointer',
       activeClass: 'ui-state-active',
       hoverClass: 'ui-state-hover',

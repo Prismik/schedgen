@@ -28,24 +28,34 @@ h2 { margin: 0; }
 .course { width: 140px; border: solid 1px #D1D1D1; padding: 10px; margin-bottom: 20px; cursor: move; z-index: 99999; }
 .schedCourse .inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 35px; }
 .course input { width: 131px; }
+.schedCourse input {
+  background-color: rgba(255,255,255,0.1);
+  border: none;
+}
+::-webkit-input-placeholder { color: rgb(81, 81, 81); }
+:-moz-placeholder { /* Firefox 18- */ color: rgb(81, 81, 81); }
+::-moz-placeholder {  /* Firefox 19+ */ color: rgb(81, 81, 81); }
+:-ms-input-placeholder { color: red; }
 table, .courses { float: right; }
 table { border-bottom: solid 1px #D1D1D1; background-color: #FFF; min-width: 966px; }
 td.last { border-bottom: none; }
-tr { height: 50px; border-left:1px solid #D1D1D1; border-right: 1px solid #D1D1D1; }
+tr { height: 25px; border-left:1px solid #D1D1D1; border-right: 1px solid #D1D1D1; }
 tr.first { height: 20px; background-color: rgb(249, 249, 249); }
 tr.first td { height: 20px; }
 tr.last { border-bottom: solid 1px #D1D1D1; }
 table, tr.first, tr.first td { border-left:none; border-right: none; border-top: none; }
 td { 
-  height: 49px;
+  height: 24px;
   position: relative;
   border-top: none; 
   border-right: none;
   border-bottom: 1px solid #D1D1D1; 
   border-left: none;  
   padding: 0; 
-} 
+}
+td[rowspan="1"] .schedCourse b { display: none; }
 td[rowspan="1"] .schedCourse input { display: none; }
+td[rowspan="1"] .inner { height: 15px; }
 .schedCourse .info { font-size: 9px; font-weight: normal; height: 10px; }
 td:not([rowspan="1"]) .schedCourse .info { display: none; }
 td:not([rowspan="1"]) .schedCourse .inner { height: 61px !important; }
