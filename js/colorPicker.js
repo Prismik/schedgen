@@ -14,8 +14,6 @@ self.create = function(colors, colorDidChange) {
   colorPicker.show = function(anchor, animation) {
     animation = animation || 'ease-in';
 
-    console.log("didShow");
-
     // Use anchor as the starting point for the show animation
     // container should be positioned absolute
     colorPicker.container.css('display', 'block');
@@ -28,7 +26,6 @@ self.create = function(colors, colorDidChange) {
   //| C1 | C2 | C3 | The active tile is brighter, the rest darker
   // --------------  When choosing a new tile, the color gets brighter within a time frame (animation)
   colorPicker.hide = function(animation) {
-    console.log('hide');
     animation = animation || 'ease-in';
     colorPicker.container.css('display', 'none');
   };

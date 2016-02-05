@@ -147,9 +147,14 @@
   self.init = function() {
     $('td.inner').droppable({
       accept: function(element) {
-        if (element.hasClass('.js-course')) {
+        if ($(element).hasClass('js-course') && $(this).children().length == 0 || $(this).find('.ui-draggable-dragging').length != 0) {
           // TODO Check for any overlaps and refuse drop if one or more occur.
-          return true; 
+          var location = cellLocation($(this));
+          var gap = gapBeforeNextCell(location.y, location.x);
+          var rows = $(element).height() / self.cellHeight;
+          if (gap - rows + 1 >= 0) {
+            return true; 
+          }
         }
 
         return false;
