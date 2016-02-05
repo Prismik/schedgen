@@ -80,19 +80,26 @@
   };
 
   var isDropEventValid = function(droppable, element) {
+    // The drop zone is free or is the same location we came from
     if ($(droppable).children().length == 0 || $(droppable).find('.ui-draggable-dragging').length != 0) {
-      // TODO Check for any overlaps and refuse drop if one or more occur.
-      var location = cellLocation($(droppable));
-      var gap = gapBeforeNextCell(location.y, location.x);
+      var dropLocation = cellLocation($(droppable));
+      var dragLocation = cellLocation($(element.parent()));
+      var gap = gapBeforeNextCell(dropLocation.y, dropLocation.x);
       var rows = $(element).height() / self.cellHeight;
-      if (gap - rows + 1 >= 0) {
-        return true; 
-      }
+      
+      // The new location area is within the area we already covered
+      if (dragLocation.x == dropLocation.x && dragLocation.y > dropLocation.y && dragLocation.y - dropLocation.y <= rows)
+        return true;
+
+      // The new location area is free for a drop
+      if (gap - rows + 1 >= 0)
+        return true;
     }
     
     return false;
   };
-
+  
+  // TODO Create function for course creation 
   var dropInTd = function(event, ui) {
     // TODO Check these conditions to have only one
     var revert = ui.draggable.hasClass('course') || !isDropEventValid(this, ui.draggable);
@@ -146,7 +153,7 @@
       $(this).html(course);
 
       var row = $(this).parent().index(); // td in tr -> his index
-      // The rows taken are detirmined by the data element or 1 by default
+      // The rows taken are determined by the data element or 1 by default
       refresh($(this), row, row + rows);
     }
   };
