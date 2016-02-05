@@ -28,6 +28,7 @@
             return false;
           }
         });
+
         if (cell == null) 
           gap++;
       }
@@ -78,60 +79,76 @@
       refreshColumn(fromLocation.x)
   };
 
+  var isDropEventValid = function(droppable, element) {
+    if ($(droppable).children().length == 0 || $(droppable).find('.ui-draggable-dragging').length != 0) {
+      // TODO Check for any overlaps and refuse drop if one or more occur.
+      var location = cellLocation($(droppable));
+      var gap = gapBeforeNextCell(location.y, location.x);
+      var rows = $(element).height() / self.cellHeight;
+      if (gap - rows + 1 >= 0) {
+        return true; 
+      }
+    }
+    
+    return false;
+  };
+
   var dropInTd = function(event, ui) {
-    var name = '';
-    var color = '';
-    var what = '';
-    var where = '';
-    var rows = 1;
-    var id = ui.draggable.data('course');
-    if (ui.draggable.hasClass('schedCourse')) {
-      name = ui.draggable.find('.js-name').html();
-      color = ui.draggable.css('background-color');
-      what = ui.draggable.find('.js-what').val();
-      where = ui.draggable.find('.js-where').val();
-      rows = ui.draggable.data('rows'); 
-      ui.draggable.remove();
-    }
-    else {
-      name = ui.draggable.find('input[type=text]').val()
-      color = ui.draggable.css('background-color')
-    }
+    // TODO Check these conditions to have only one
+    var revert = ui.draggable.hasClass('course') || !isDropEventValid(this, ui.draggable);
+    ui.draggable.draggable('option', 'revert', revert);
     
-    var course = $('<div data-rows="'+rows+'" style="height: '+rows*self.cellHeight+'px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><div class="inner"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input class="js-what" type-"text" placeholder="What ?" value="'+what+'"><br><input class="js-where" type="text" placeholder="Where ?" value="'+where+'"><br></div></div>');
-    
-    if (self.active == null)
-      self.active = $(this);
-
-    course.draggable({ cursorAt: {top: 3, left: 75 }, revert: true, 
-      start: function(event, ui) {
-        self.active = ui.helper.parent();
+    if (ui.draggable.hasClass('course') || !revert) {
+      var name = '';
+      var color = '';
+      var what = '';
+      var where = '';
+      var rows = 1;
+      var id = ui.draggable.data('course');
+      if (ui.draggable.hasClass('schedCourse')) {
+        name = ui.draggable.find('.js-name').html();
+        color = ui.draggable.css('background-color');
+        what = ui.draggable.find('.js-what').val();
+        where = ui.draggable.find('.js-where').val();
+        rows = ui.draggable.data('rows'); 
+        ui.draggable.remove();
       }
-    });
-
-    course.resizable({ grid: self.cellHeight,  handles: 's', 
-      resize: function(event, ui) {
-        // TODO if (ui.size.height < maxSize)       
-        // ui.size.height = 
-      },
-      start: function(event, ui) {
-        var location = cellLocation(ui.element.parent()); // ?  
-        var diff = (1 + gapBeforeNextCell(location.y, location.x)) * self.cellHeight;
-        course.resizable('option', 'maxHeight', diff);
-      },
-      stop: function(event, ui) {
-        var row = ui.element.parent().parent().index(); // ?
-        var rowTaken = Math.floor(ui.size.height / self.cellHeight + 0.99);
-        $(ui.element).data('rows', rowTaken);
-        refresh(ui.element.parent(), row, row + rowTaken);
+      else {
+        name = ui.draggable.find('input[type=text]').val()
+        color = ui.draggable.css('background-color')
       }
-    });
+      
+      var course = $('<div data-rows="'+rows+'" style="height: '+rows*self.cellHeight+'px; background-color:' + color + '" class="js-course schedCourse" data-course="'+id+'"><div class="inner"><b>'+'<div class="js-name">'+name+'</div>'+'</b><div class="info">Expand the course...</div><input class="js-what" type-"text" placeholder="What ?" value="'+what+'"><br><input class="js-where" type="text" placeholder="Where ?" value="'+where+'"><br></div></div>');
+      
+      if (self.active == null)
+        self.active = $(this);
 
-    $(this).html(course);
+      course.draggable({ cursorAt: {top: 3, left: 75 }, revert: true, 
+        start: function(event, ui) {
+          self.active = ui.helper.parent();
+        }
+      });
 
-    var row = $(this).parent().index();
-    // The rows taken are detirmined by the data element or 1 by default
-    refresh($(this), row, row + rows);
+      course.resizable({ grid: self.cellHeight,  handles: 's', 
+        start: function(event, ui) {
+          var location = cellLocation(ui.element.parent()); // div in td -> his location 
+          var diff = (1 + gapBeforeNextCell(location.y, location.x)) * self.cellHeight;
+          course.resizable('option', 'maxHeight', diff);
+        },
+        stop: function(event, ui) {
+          var row = ui.element.parent().parent().index(); // div in td in tr -> his index
+          var rowTaken = Math.floor(ui.size.height / self.cellHeight + 0.99);
+          $(ui.element).data('rows', rowTaken);
+          refresh(ui.element.parent(), row, row + rowTaken);
+        }
+      });
+
+      $(this).html(course);
+
+      var row = $(this).parent().index(); // td in tr -> his index
+      // The rows taken are detirmined by the data element or 1 by default
+      refresh($(this), row, row + rows);
+    }
   };
 
   self.refresh = function() {
@@ -146,19 +163,7 @@
 
   self.init = function() {
     $('td.inner').droppable({
-      accept: function(element) {
-        if ($(element).hasClass('js-course') && $(this).children().length == 0 || $(this).find('.ui-draggable-dragging').length != 0) {
-          // TODO Check for any overlaps and refuse drop if one or more occur.
-          var location = cellLocation($(this));
-          var gap = gapBeforeNextCell(location.y, location.x);
-          var rows = $(element).height() / self.cellHeight;
-          if (gap - rows + 1 >= 0) {
-            return true; 
-          }
-        }
-
-        return false;
-      },
+      accept: '.js-course',
       tolerance: 'pointer',
       activeClass: 'ui-state-active',
       hoverClass: 'ui-state-hover',
