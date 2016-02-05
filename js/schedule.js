@@ -149,6 +149,7 @@
       accept: function(element) {
         if (element.hasClass('.js-course')) {
           // TODO Check for any overlaps and refuse drop if one or more occur.
+          return true; 
         }
 
         return false;
