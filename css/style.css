@@ -18,14 +18,54 @@ h2 { margin: 0; }
   background-size: 80px 60px; 
   background-repeat: no-repeat;
 }
-#addCourse { margin-right: 33px; }
-#addCourse, #clear { margin-bottom: 5px; margin-top: 5px; color: rgb(81, 81, 81); outline-width: 0; cursor: pointer; font-weight: bold; border: none; background-color: rgb(46, 204, 113); width: 90px; height: 30px; }
-#addCourse:hover, #clear:hover { background-color: rgb(40, 190, 104); }
-.courses { width: 218px; height: 540px; background-color: #FFF; border: solid 1px rgb(232, 232, 232); margin-right: 10px; margin-bottom: 10px; }  
+#clear { 
+  margin-top: 5px;
+  color: rgb(81, 81, 81);
+  position: absolute;
+  bottom: 0px;
+  padding: 7px 0;
+  border-left: solid 5px rgb(255, 80, 80);
+  width: 213px;
+}
+
+#addCourse:hover, #clear:hover { cursor: pointer; }
+#addCourse:hover { background-color: rgb(40, 190, 104); }
+#clear:hover { background-color: rgb(255, 80, 80); }
+.boxAddCourse {
+  border-left: solid 5px rgb(46, 204, 113);
+  padding: 7px 0;
+}
+
+.separator {
+  background-color: #fafafa;
+  height: 1px;
+}
+
+.courses { 
+  position: relative;
+  width: 218px;
+  height: 540px;
+  background-color: #FFF;
+  border: solid 1px rgb(232, 232, 232);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 .courses ul { height: 480px; overflow: scroll; list-style: none; display: inline; }
-.courses ul li { width: 161px; height: 73px; margin-bottom: 10px; margin-left: 27px; }
+.courses ul li { 
+  width: 218px;
+  height: 73px;
+  margin-bottom: 10px;
+}
+
 .schedCourse { cursor: move; height: 100%; background-color: #D1F486; z-index: 9999; position: relative; }
-.course { width: 140px; border: solid 1px #D1D1D1; padding: 10px; margin-bottom: 20px; cursor: move; z-index: 99999; }
+.course { 
+  width: 218px; 
+  padding: 10px;
+  margin-bottom: 20px;
+  cursor: move;
+  z-index: 99999;
+}
 .schedCourse .inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); height: 35px; }
 .course input { width: 131px; }
 .schedCourse input {
